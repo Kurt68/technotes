@@ -5,7 +5,7 @@ import { setCredentials } from '../../features/auth/authSlice'
 
 // code that will allow us to use jwt and refresh tokens
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://https://technotes-api-o91u.onrender.com',
+  baseUrl: 'https://technotes-api-o91u.onrender.com',
   credentials: 'include', // send cookie always, contains the refresh token
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token
