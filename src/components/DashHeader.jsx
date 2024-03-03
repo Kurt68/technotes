@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faFileCirclePlus,
@@ -22,12 +22,20 @@ const DashHeader = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const [sendLogout, { isLoading, isSuccess, isError, error }] =
-    useSendLogoutMutation()
+  const [sendLogout, { isLoading, isError, error }] = useSendLogoutMutation()
 
-  useEffect(() => {
-    if (isSuccess) navigate('/')
-  }, [isSuccess, navigate])
+  // useEffect(() => {
+  //   if (isSuccess) navigate('/')
+  // }, [isSuccess, navigate])
+
+  const sendLogoutHandler = async () => {
+    try {
+      await sendLogout({}).unwrap()
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const onNewNoteClicked = () => navigate('/dash/notes/new')
   const onNewUserClicked = () => navigate('/dash/users/new')
@@ -92,7 +100,7 @@ const DashHeader = () => {
   }
 
   const logoutButton = (
-    <button className="icon-button" title="Logout" onClick={sendLogout}>
+    <button className="icon-button" title="Logout" onClick={sendLogoutHandler}>
       <FontAwesomeIcon icon={faRightFromBracket} />
     </button>
   )
